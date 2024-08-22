@@ -5,9 +5,11 @@ const cors = require('cors');
 
 const app = express();
 
+// Configurar CORS
 app.use(cors({
-  origin: 'https://serverapistart-523298ebc948.herokuapp.com/' // Cambia esto a la URL de tu frontend en producción
+  origin: 'http://localhost:5173' // Permite solicitudes desde este origen
 }));
+
 app.use(bodyParser.json());
 
 app.post('/api/send-email', async (req, res) => {
@@ -42,6 +44,7 @@ app.post('/api/send-email', async (req, res) => {
   }
 });
 
+// Inicia el servidor en el puerto asignado por Vercel
 app.listen(process.env.PORT || 3001, () => {
   console.log('Servidor escuchando en el puerto 3001');
 });
