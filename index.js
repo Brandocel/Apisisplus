@@ -6,34 +6,31 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: '*' // O especifica el origen que deseas permitir, por ejemplo, 'http://localhost:5173'
+  origin: 'http://localhost:5173' // Cambia esto a la URL de tu frontend en producción
 }));
 app.use(bodyParser.json());
 
 app.post('/api/send-email', async (req, res) => {
   const { name, email, message } = req.body;
 
-  // Configura el transporte de nodemailer para usar el servidor SMTP de webmail.universopc.mx
   let transporter = nodemailer.createTransport({
     host: 'webmail.universopc.mx',
     port: 465, // o 587 si estás usando TLS
-    secure: true, // true para SSL, false para TLS
+    secure: true, 
     auth: {
       user: 'soporte@universopc.mx',
       pass: 'Spectrum3821$'
     },
     tls: {
-      rejectUnauthorized: false // Desactivar la verificación del certificado
+      rejectUnauthorized: false 
     }
   });
-  
 
-  // Opciones del correo electrónico
   let mailOptions = {
-    from: `"${name}" <${email}>`, // Remitente
-    to: 'soporte@universopc.mx', // Destinatario
-    subject: `Nuevo mensaje de ${name}`, // Asunto
-    text: message, // Contenido del mensaje
+    from: `"${name}" <${email}>`, 
+    to: 'soporte@universopc.mx', 
+    subject: `Nuevo mensaje de ${name}`, 
+    text: message, 
   };
 
   try {
@@ -45,7 +42,6 @@ app.post('/api/send-email', async (req, res) => {
   }
 });
 
-// Inicia el servidor en el puerto 3001
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log('Servidor escuchando en el puerto 3001');
 });
