@@ -9,10 +9,12 @@ const app = express();
 // Configurar CORS para permitir solicitudes desde cualquier origen
 app.use(cors());
 
-// Alternativamente, puedes usar:
-// app.use(cors({ origin: '*' }));
-
 app.use(bodyParser.json());
+
+// Ruta de bienvenida en la raíz
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido a la API de Contacto de Sistemas Plus Caribe!');
+});
 
 app.post('/api/send-email', async (req, res) => {
   const { name, email, message, captchaToken } = req.body;
