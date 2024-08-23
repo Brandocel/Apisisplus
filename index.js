@@ -20,7 +20,7 @@ app.post('/api/send-email', async (req, res) => {
   const { name, email, message, captchaToken } = req.body;
 
   // Verifica el reCAPTCHA v3
-  const secretKey = '6Lf1MCOqAAAAAPrzFkCYptvGafUE7Gc2m0tyYBmo';
+  const secretKey = '6LcaNy0qAAAAAOw98kpHul5H1zzacII-rqRsvINi';
   const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`;
 
   try {
